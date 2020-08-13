@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<cs50.h>
+int main(void)
+{
+    int i, j, k, n;
+    //asks for height untill it is between 1 and 8 inclusive if its <= 0 or >= 9 it will again ask for a valid height
+    do
+    {
+
+        n = get_int("enter the height: ");
+    }
+    while (n <= 0 || n >= 9);
+    for (i = 1; i <= n; i++)
+    {
+        //prints the whitespaces if 1st row it will print height - 1 spaces etc...
+        for (k = 0; k < n - i; k++)
+        {
+            printf(" ");
+        }
+        for (j = 1; j <= 2 * i; j++)
+        {
+            //prints the hashes
+            printf("#");
+            //prints the gap btw the two parts so pyramid
+            if (j == i)
+            {
+                printf("  ");
+            }
+
+        }
+        //moves one line down
+        printf("\n");
+    }
+
+}
