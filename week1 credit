@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<cs50.h>
+int main(void)
+{
+    int s = 0, l = 0, di, f;
+    long n = 0, d = 0;
+    //asks for card number
+    do
+    {
+        n = get_long("enter the credit card no: ");
+
+    }
+    while (n == 0);
+    //create a copy of no to do calculations
+    d = n;
+    //finds the checksum
+    do
+    {
+        s += d % 10;
+        d = d / 10;
+        di = (d % 10) * 2;
+        while (di != 0)
+        {
+            s += di % 10;
+            di /= 10;
+        }
+        d = d / 10;
+    }
+    while (d != 0);
+    //checks checksum is valid
+    if (s % 10 == 0)
+    {
+        //if valid finds the length and takes the first 2 digits of the card number
+        do
+        {
+            n = n / 10;
+            l++;
+        }
+        while (n > 99);
+        l += 2;
+        //checks for amex
+        if (l == 15 && n == 34 | n == 37)
+        {
+            printf("AMEX\n");
+        }
+        //checks for mastercard
+        else if (l == 16 && n == 51 | n == 52 | n == 53 | n == 54 | n == 55)
+        {
+            printf("MASTERCARD\n");
+        }
+        //checks for visa
+        else if (l == 13 | l == 16 && n / 10 == 4)
+        {
+            printf("VISA\n");
+        }
+        //if every other condition is false then it is invalid no
+        else
+        {
+            printf("INVALID\n");
+        }
+    }
+    else
+    {
+        printf("INVALID\n");
+    }
+}
